@@ -74,9 +74,27 @@ const postProductosCarritoById = async (req, res) => {
   }
 }
 
+const deleteProdCarritoById = async (req, res) => {
+  try {
+    // eslint-disable-next-line camelcase
+    const { id, id_prod } = req.params
+    const carrito = await carritos.eliminarProducto(id, id_prod)
+    if (carrito.error) {
+      return res.json({
+        status: 400,
+        error: carrito.error
+      })
+    }
+    return res.sendStatus(200)
+  } catch (error) {
+    return res.sendStatus(500)
+  }
+}
+
 module.exports = {
   postCarrito,
   deleteCarritoById,
   getProductosCarritoById,
-  postProductosCarritoById
+  postProductosCarritoById,
+  deleteProdCarritoById
 }

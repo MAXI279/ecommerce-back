@@ -41,7 +41,7 @@ class Carrito {
     const nuevoProducto = { ...prod, id: ultimoId }
     carrito.productos.push(nuevoProducto)
     const { id, ...carritoSinId } = carrito
-    console.log(carritoSinId)
+
     const carritoUpdated = await this.carritos.update(carritoSinId, idCarrito)
     if (carritoUpdated === -1) return { error: `Error al actualizar carrito con id: ${idCarrito} !` }
     return carrito
@@ -58,6 +58,18 @@ class Carrito {
     const idEliminado = await this.carritos.deleteById(id)
     if (!idEliminado) return { error: `Carrito con id ${id} no encontrado!` }
     return idEliminado
+  }
+
+  async eliminarProducto (idCarrito, idProd) {
+    const carrito = await this.carritos.getById(idCarrito)
+    if (!carrito) return { error: `Carrito con id ${idCarrito} no encontrado!` }
+    if (!carrito.productos.find(prd => prd.id === +idProd)) return { error: `Id producto con id ${idProd} no encontrado en carrito!` }
+    carrito.productos = carrito.productos.filter(prd => prd.id !== +idProd)
+    const { id, ...carritoSinId } = carrito
+
+    const carritoUpdated = await this.carritos.update(carritoSinId, idCarrito)
+    if (carritoUpdated === -1) return { error: `Error al actualizar carrito con id: ${idCarrito} !` }
+    return carrito
   }
 }
 
