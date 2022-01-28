@@ -10,8 +10,8 @@ app.use('/api', rutasApi)
 
 app.all('*', (req, res) => {
   return res.status(404).json({
-    status: 404,
-    message: 'Not found'
+    error: -2,
+    descripcion: `ruta ${req.url} método ${req.method} no implementada`
   })
 })
 
