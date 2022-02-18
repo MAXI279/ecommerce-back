@@ -1,16 +1,17 @@
-const Contenedor = require('../utils/manejo-archivos')
+const ContenedorMongoDb = require('../contenedores/ContenedorMongoDb')
+const Producto = require('../Producto')
 
-class Producto {
-  constructor (rutaPersistencia) {
-    this.productos = new Contenedor(rutaPersistencia)
+class ProductosDaoMongo extends ContenedorMongoDb {
+  constructor () {
+    super(Producto)
   }
 
   async listarTodos () {
-    return await this.productos.getAll()
+    return await this.getAll()
   }
 
   async listarPorId (id) {
-    const producto = await this.productos.getById(id)
+    const producto = await this.getById(id)
     return producto || { error: `Producto con id ${id} no encontrado!` }
   }
 
@@ -20,22 +21,22 @@ class Producto {
     if (precio < 0 || isNaN(precio)) return { error: 'El precio debe ser un número positivo' }
 
     const nuevoProducto = { ...prod, timestamp: Date.now() }
-    await this.productos.save(nuevoProducto)
+    await this.save(nuevoProducto)
     return nuevoProducto
   }
 
   async actualizar (prod, id) {
-    const producto = await this.productos.update(prod, id)
+    const producto = await this.update(prod, id)
     if (!producto) return { error: `Producto con id ${id} no encontrado!` }
     if (producto === -1) return { error: `Error al actualizar producto con id: ${id} !` }
     return producto
   }
 
   async eliminar (id) {
-    const idEliminado = await this.productos.deleteById(id)
+    const idEliminado = await this.deleteById(id)
     if (!idEliminado) return { error: `Producto con id ${id} no encontrado!` }
     return idEliminado
   }
 }
 
-module.exports = Producto
+module.exports = ProductosDaoMongo

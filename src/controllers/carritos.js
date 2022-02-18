@@ -1,6 +1,8 @@
 
-const Carrito = require('../models/carritos')
-const carritos = new Carrito('./src/data/carritos.json')
+// const Carrito = require('../models/carritos')
+// const carritos = new Carrito('./src/data/carritos.json')
+const { carritosDao } = require('../models/index')
+const carritos = carritosDao
 
 const postCarrito = async (req, res) => {
   try {
@@ -70,7 +72,10 @@ const postProductosCarritoById = async (req, res) => {
       body: carrito
     })
   } catch (error) {
-    return res.sendStatus(500)
+    return res.status(500).json({
+      status: 500,
+      error: error
+    })
   }
 }
 
