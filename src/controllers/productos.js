@@ -1,6 +1,5 @@
-
-const Producto = require('../models/productos')
-const productos = new Producto('./src/data/productos.json')
+const { productosDao } = require('../models/index')
+const productos = productosDao
 
 const getProductos = async (req, res) => {
   const { id } = req.params
