@@ -52,7 +52,7 @@ class ContenedorFirebase {
 
   async save (obj) {
     try {
-      return await this.coleccion.doc().create(obj)
+      return await this.coleccion.add(obj)
     } catch (error) {
       console.log('No se pudo insertar el elemento', error)
       return -1

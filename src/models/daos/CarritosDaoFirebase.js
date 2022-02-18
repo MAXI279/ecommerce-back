@@ -27,7 +27,7 @@ class CarritosDaoFirebase extends ContenedorFirebase {
 
     const nuevoCarrito = { timestamp: Date.now(), productos }
     const idCarrito = await this.save(nuevoCarrito)
-    return idCarrito
+    return idCarrito.id
   }
 
   async agregarProducto (prod, idCarrito) {
