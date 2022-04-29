@@ -1,0 +1,75 @@
+{"level":"warn","message":"ruta / método GET no implementada"}
+{"level":"warn","message":"ruta /favicon.ico método GET no implementada"}
+{"level":"warn","message":"ruta /public método GET no implementada"}
+{"level":"warn","message":"ruta /login método GET no implementada"}
+{"level":"warn","message":"ruta /api método GET no implementada"}
+{"level":"warn","message":"ruta /api/public método GET no implementada"}
+{"level":"warn","message":"ruta /public método GET no implementada"}
+{"level":"error","message":"500 - [INTERNAL ERROR]"}
+{"level":"error","message":"500 - [INTERNAL ERROR]"}
+{"level":"error","message":"500 - [INTERNAL ERROR]"}
+{"level":"error","message":"500 - [INTERNAL ERROR]"}
+{"level":"error","message":"500 - [INTERNAL ERROR]"}
+{"level":"warn","message":"ruta /socket.io/socket.io.js método GET no implementada"}
+{"level":"warn","message":"ruta /public/styles.css método GET no implementada"}
+{"level":"warn","message":"ruta /public/index.js método GET no implementada"}
+{"level":"warn","message":"ruta /socket.io/socket.io.js método GET no implementada"}
+{"level":"warn","message":"ruta /public/styles.css método GET no implementada"}
+{"level":"warn","message":"ruta /public/index.js método GET no implementada"}
+{"level":"warn","message":"ruta /public/styles.css método GET no implementada"}
+{"level":"warn","message":"ruta /socket.io/socket.io.js método GET no implementada"}
+{"level":"warn","message":"ruta /public/index.js método GET no implementada"}
+{"level":"warn","message":"ruta /public método GET no implementada"}
+{"level":"warn","message":"ruta /pub método GET no implementada"}
+{"level":"warn","message":"ruta /socket.io/socket.io.js método GET no implementada"}
+{"level":"warn","message":"ruta /public/styles.css método GET no implementada"}
+{"level":"warn","message":"ruta /public/index.js método GET no implementada"}
+{"level":"warn","message":"ruta /public/styles.css método GET no implementada"}
+{"level":"warn","message":"ruta /public/index.js método GET no implementada"}
+{"level":"warn","message":"ruta /public método GET no implementada"}
+{"level":"warn","message":"ruta /public/styles.css método GET no implementada"}
+{"level":"warn","message":"ruta /public/index.js método GET no implementada"}
+{"level":"warn","message":"ruta /src/public método GET no implementada"}
+{"level":"warn","message":"ruta /src/public método GET no implementada"}
+{"level":"warn","message":"Invalid password"}
+{"level":"warn","message":"data and hash arguments required"}
+{"level":"warn","message":"Invalid password"}
+{"level":"warn","message":"ruta /signup método POST no implementada"}
+{"level":"warn","message":"ruta /signup método POST no implementada"}
+{"level":"warn","message":"ruta /signup método POST no implementada"}
+{"level":"warn","message":"ruta /signup método POST no implementada"}
+{"level":"warn","message":"ruta /signup método GET no implementada"}
+{"level":"warn","message":"ruta /signup método POST no implementada"}
+{"level":"warn","message":"ruta /public/uploads/ método GET no implementada"}
+{"level":"warn","message":"ruta /public/uploads/bkp.png método GET no implementada"}
+{"level":"warn","message":"Invalid password"}
+{"level":"warn","message":"Invalid password"}
+{"level":"warn","message":"Invalid password"}
+{"level":"warn","message":"Invalid password"}
+{"level":"warn","message":"Invalid password"}
+{"level":"warn","message":"Invalid password"}
+{"level":"warn","message":"ruta /public/uploads/ método GET no implementada"}
+{"level":"warn","message":"ruta /public/uploads/ método GET no implementada"}
+{"level":"warn","message":"ruta /public/uploads/ método GET no implementada"}
+{"level":"warn","message":"ruta /... método GET no implementada"}
+{"level":"warn","message":"ruta /... método GET no implementada"}
+{"level":"warn","message":"ruta /... método GET no implementada"}
+{"level":"warn","message":"ruta /... método GET no implementada"}
+{"level":"warn","message":"ruta /... método GET no implementada"}
+{"level":"warn","message":"ruta /... método GET no implementada"}
+{"level":"warn","message":"ruta /... método GET no implementada"}
+{"level":"warn","message":"ruta /... método GET no implementada"}
+{"level":"warn","message":"ruta /... método GET no implementada"}
+{"level":"warn","message":"data and hash arguments required"}
+{"level":"warn","message":"ruta /... método GET no implementada"}
+{"level":"warn","message":"ruta /... método GET no implementada"}
+{"level":"warn","message":"ruta /... método GET no implementada"}
+{"level":"warn","message":"ruta /... método GET no implementada"}
+{"level":"warn","message":"ruta /... método GET no implementada"}
+{"level":"warn","message":"ruta /... método GET no implementada"}
+{"level":"warn","message":"ruta /... método GET no implementada"}
+{"level":"warn","message":"ruta /... método GET no implementada"}
+{"level":"warn","message":"ruta /productos método GET no implementada"}
+{"level":"warn","message":"ruta /productos método GET no implementada"}
+{"level":"warn","message":"ruta /user método GET no implementada"}
+{"level":"error","message":"500 - [INTERNAL ERROR]"}

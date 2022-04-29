@@ -1,0 +1,55 @@
+
+<div class="row align-items-md-stretch">
+    <div class="col-lg-12">
+        <div class="mt-2 mb-3 alert alert-success" role="alert">
+            <h4 style="display: inline-block;">
+                <img src="public/uploads/{{ foto }}" alt="avatar" class="img-responsive" style="max-width: 50px;border-radius: 50px;">
+                {{nombre}} - email: {{ email }}
+            </h4>
+            <a href="logout" class="btn btn-warning" style="float:right;margin-top:10px">Desloguear</a>
+        </div>
+    </div>
+</div>
+
+<h2>Bienvenido</h2>
+<h3>{{message}}</h3>
+<h3>Productos</h3>
+<div class="container" style="margin-bottom: 15px;">
+  <div class="row">
+    {{#listadoProd}}
+        <div class="col-12 col-md-4 col-lg-3">
+            <div class="card">
+                <img class="card-img-top" src="{{ foto }}" alt="Card image cap" style="max-height:150px;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ nombre }}</h5>
+                    <p class="card-text">{{ descripcion }}</p>
+                    <a href="api/carrito/{{ ../carritoId }}/producto/{{ id }}" class="btn btn-primary">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+    {{else}}
+        <p class="empty">No content</p>
+    {{/listadoProd}}
+  </div>
+</div>
+<div class="row align-items-md-stretch">
+    <div class="col-lg-12">
+        <div class="p-4 mt-5 text-dark rounded-3 bg-gris">
+            <h3>Mi carrito</h3>
+            {{#carrito}}
+            <ul class="list-group">
+                {{#productos}}
+                <li class="list-group-item">{{ nombre }}</li>
+                {{/productos}}
+            </ul>
+            {{/carrito}}
+        </div>
+    </div>
+
+    <form method="POST" action="enviar-carrito">
+        <input type="hidden" class="form-control" name="carritoId" id="carritoId" value="{{ carritoId }}">
+        <button class="w-100 mt-3 btn btn-lg btn-primary" type="submit">Enviar Carrito</button>
+    </form>
+</div>
+
+

@@ -28,6 +28,32 @@ class ContenedorMongoDb {
     }
   }
 
+  async getByEmail (email) {
+    try {
+      const element = await this.schema.findOne({ email }, { __v: 0 })// .populate('accounts');
+      if (!element) {
+        return null
+      } else {
+        return element
+      }
+    } catch (error) {
+      console.log('No se encontro el elemento', error)
+    }
+  }
+
+  async getByUserId (id) {
+    try {
+      const element = await this.schema.findOne(id, { __v: 0 })
+      if (!element) {
+        return null
+      } else {
+        return element
+      }
+    } catch (error) {
+      console.log('No se encontro el elemento', error)
+    }
+  }
+
   async deleteAll () {
     try {
       await this.schema.deleteMany({})

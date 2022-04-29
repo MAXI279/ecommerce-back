@@ -17,16 +17,22 @@ class CarritosDaoMongo extends ContenedorMongoDb {
     return carrito || { error: `Carrito con id ${id} no encontrado!` }
   }
 
+  async listarPorUserId (id) {
+    const carrito = await this.getByUserId({ usuario: id })
+    return carrito || { error: `Carrito con usuario id ${id} como dueño no encontrado!` }
+  }
+
   async listarProductosPorId (id) {
     const carrito = await this.getById(id)
     return carrito || { error: `Carrito con id ${id} no encontrado!` }
   }
 
   async guardar (prod) {
-    let { productos } = prod
+    let { productos, usuario } = prod
+    if (!usuario) return { error: 'No puede existir un carrito sin dueño!' }
     if (!productos) { productos = [] }
 
-    const nuevoCarrito = { timestamp: Date.now(), productos }
+    const nuevoCarrito = { timestamp: Date.now(), productos, usuario }
     const idCarrito = await this.save(nuevoCarrito)
     return idCarrito
   }

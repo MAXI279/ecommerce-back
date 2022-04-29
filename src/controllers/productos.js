@@ -1,18 +1,22 @@
 const { productosDao } = require('../models/index')
 const productos = productosDao
 
-const getProductos = async (req, res) => {
-  const { id } = req.params
-  if (!id) {
-    return res.json({
-      status: 200,
-      body: await productos.listarTodos()
-    })
+const getProductos = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    if (!id) {
+      return res.json({
+        status: 200,
+        body: await productos.listarTodos()
+      })
+    }
+    return getProductoById(req, res, next)
+  } catch (error) {
+    next(error)
   }
-  return getProductoById(req, res)
 }
 
-const getProductoById = async (req, res) => {
+const getProductoById = async (req, res, next) => {
   try {
     const { id } = req.params
     const producto = await productos.listarPorId(id)
@@ -27,11 +31,11 @@ const getProductoById = async (req, res) => {
       body: producto
     })
   } catch (error) {
-    return res.sendStatus(500)
+    next(error)
   }
 }
 
-const postProducto = async (req, res) => {
+const postProducto = async (req, res, next) => {
   try {
     const producto = await productos.guardar(req.body)
     if (producto.error) {
@@ -45,11 +49,11 @@ const postProducto = async (req, res) => {
       body: producto
     })
   } catch (error) {
-    return res.sendStatus(500)
+    next(error)
   }
 }
 
-const putProductoById = async (req, res) => {
+const putProductoById = async (req, res, next) => {
   try {
     const { id } = req.params
     const producto = await productos.actualizar(req.body, id)
@@ -64,11 +68,11 @@ const putProductoById = async (req, res) => {
       body: producto
     })
   } catch (error) {
-    return res.sendStatus(500)
+    next(error)
   }
 }
 
-const deleteProductoById = async (req, res) => {
+const deleteProductoById = async (req, res, next) => {
   try {
     const { id } = req.params
     const producto = await productos.eliminar(id)
@@ -80,7 +84,7 @@ const deleteProductoById = async (req, res) => {
     }
     return res.sendStatus(200)
   } catch (error) {
-    return res.sendStatus(500)
+    next(error)
   }
 }
 

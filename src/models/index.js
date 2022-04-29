@@ -1,8 +1,10 @@
+const env = require('../config/env.config')
+
 /* eslint-disable no-case-declarations */
 let productosDao
 let carritosDao
 
-switch (process.env.DATASOURCE) {
+switch (env.DATASOURCE) {
   case 'mongodb':
     const ProductosDaoMongo = require('../models/daos/ProductosDaoMongo')
     const CarritosDaoMongo = require('../models/daos/CarritosDaoMongo')

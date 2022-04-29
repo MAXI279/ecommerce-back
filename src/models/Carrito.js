@@ -5,6 +5,10 @@ const CarritoSchema = new mongoose.Schema({
   timestamp: {
     type: Date,
     default: Date.now()
+  },
+  usuario: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   }
 })
 
