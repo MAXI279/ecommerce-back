@@ -1,97 +1,96 @@
-const { productosDao } = require('../models/index')
-const productos = productosDao
+const ProductosService = require('../services/ProductosService')
 
-const getProductos = async (req, res, next) => {
-  try {
-    const { id } = req.params
-    if (!id) {
+class ProductosController {
+  constructor () {
+    this.productosService = new ProductosService()
+  }
+
+  async getProductos (req, res, next) {
+    try {
+      const { id } = req.params
+      if (!id) {
+        return res.json({
+          status: 200,
+          body: await this.productosService.listarTodos()
+        })
+      }
+      return this.getProductoById(req, res, next)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getProductoById (req, res, next) {
+    try {
+      const { id } = req.params
+      const producto = await this.productosService.listarPorId(id)
+      if (producto.error) {
+        return res.json({
+          status: 400,
+          error: 'Producto no encontrado'
+        })
+      }
       return res.json({
         status: 200,
-        body: await productos.listarTodos()
+        body: producto
       })
+    } catch (error) {
+      next(error)
     }
-    return getProductoById(req, res, next)
-  } catch (error) {
-    next(error)
   }
-}
 
-const getProductoById = async (req, res, next) => {
-  try {
-    const { id } = req.params
-    const producto = await productos.listarPorId(id)
-    if (producto.error) {
+  async postProducto (req, res, next) {
+    try {
+      const producto = await this.productosService.guardar(req.body)
+      if (producto.error) {
+        return res.json({
+          status: 400,
+          error: producto.error
+        })
+      }
       return res.json({
-        status: 400,
-        error: 'Producto no encontrado'
+        status: 200,
+        body: producto
       })
+    } catch (error) {
+      next(error)
     }
-    return res.json({
-      status: 200,
-      body: producto
-    })
-  } catch (error) {
-    next(error)
   }
-}
 
-const postProducto = async (req, res, next) => {
-  try {
-    const producto = await productos.guardar(req.body)
-    if (producto.error) {
+  async putProductoById (req, res, next) {
+    try {
+      const { id } = req.params
+      const producto = await this.productosService.actualizar(req.body, id)
+      if (producto.error) {
+        return res.json({
+          status: 400,
+          error: producto.error
+        })
+      }
       return res.json({
-        status: 400,
-        error: producto.error
+        status: 200,
+        body: producto
       })
+    } catch (error) {
+      next(error)
     }
-    return res.json({
-      status: 200,
-      body: producto
-    })
-  } catch (error) {
-    next(error)
+  }
+
+  async deleteProductoById (req, res, next) {
+    try {
+      const { id } = req.params
+      const producto = await this.productosService.eliminar(id)
+      if (producto.error) {
+        return res.json({
+          status: 400,
+          error: producto.error
+        })
+      }
+      return res.sendStatus(200)
+    } catch (error) {
+      next(error)
+    }
   }
 }
 
-const putProductoById = async (req, res, next) => {
-  try {
-    const { id } = req.params
-    const producto = await productos.actualizar(req.body, id)
-    if (producto.error) {
-      return res.json({
-        status: 400,
-        error: producto.error
-      })
-    }
-    return res.json({
-      status: 200,
-      body: producto
-    })
-  } catch (error) {
-    next(error)
-  }
-}
-
-const deleteProductoById = async (req, res, next) => {
-  try {
-    const { id } = req.params
-    const producto = await productos.eliminar(id)
-    if (producto.error) {
-      return res.json({
-        status: 400,
-        error: producto.error
-      })
-    }
-    return res.sendStatus(200)
-  } catch (error) {
-    next(error)
-  }
-}
-
-module.exports = {
-  getProductos,
-  getProductoById,
-  postProducto,
-  putProductoById,
-  deleteProductoById
-}
+module.exports = ProductosController

@@ -1,6 +1,5 @@
 const express = require('express')
-// const { postProducto, getProductos } = require('../controllers/productos.web')
-const { login, getSignUp, getLogout, getFailsignup, getFaillogin, postEnviarCarrito } = require('../controllers/auth.web')
+const { login, getSignUp, getLogout, getFailsignup, getFaillogin, postEnviarCarrito, agregarProductoCarritoById } = require('../controllers/web')
 const checkAuthentication = require('../middlewares/auth.middleware')
 const sendEmailOnNewSignUp = require('../middlewares/email-new-user.middleware')
 
@@ -33,8 +32,6 @@ router.get('/login', checkAuthentication, login) // ex: getLogin
 
 router.post('/enviar-carrito', postEnviarCarrito)
 
-// router.post('/productos', postProducto)
-
-// router.get('/productos', getProductos)
+router.get('/:id/producto/:id_prod', agregarProductoCarritoById)
 
 module.exports = router

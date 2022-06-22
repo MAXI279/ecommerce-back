@@ -1,33 +1,22 @@
-
-const { productosDao } = require('../models/index')
-const productos = productosDao
-const { carritosDao } = require('../models/index')
-const carritos = carritosDao
 const env = require('../config/env.config')
 const enviarEmail = require('../utils/enviar-email')
-// const getLogin = async (req, res, next) => {
-//   try {
-//     const listadoProd = await productos.listarTodos()
-//     console.log(listadoProd)
-//     const user = req.user
-//     res.render('index', { listadoProd, foto: user.foto, nombre: user.nombre, email: user.email })
-//   } catch (error) {
-//     next(error)
-//   }
-// }
+const ProductosService = require('../services/ProductosService')
+const productosService = new ProductosService()
+const CarritosService = require('../services/CarritosService')
+const carritosService = new CarritosService()
 
 const login = async (req, res, next) => {
   try {
-    let listadoProd = await productos.listarTodos()
+    let listadoProd = await productosService.listarTodos()
     listadoProd = listadoProd.map(prod => ({ ...prod._doc, id: prod._id.toString() }))
     const user = req.user
 
     if (!req.session.nombre) {
       req.session.nombre = user.nombre
     }
-    let carrito = await carritos.listarPorUserId(user._id.toString())
+    let carrito = await carritosService.listarPorUserId(user._id.toString())
     if (carrito.error) {
-      carrito = await carritos.guardar({ usuario: user._id.toString() })
+      carrito = await carritosService.guardar({ usuario: user._id.toString() })
     }
 
     res.render('index', { carritoId: carrito._id.toString(), carrito, listadoProd, foto: user.foto, nombre: user.nombre, email: user.email })
@@ -41,7 +30,7 @@ const postEnviarCarrito = async (req, res, next) => {
     const user = req.user
     const { carritoId } = req.body
 
-    const carrito = await carritos.listarPorId(carritoId)
+    const carrito = await carritosService.listarPorId(carritoId)
     if (carrito.error) {
       return res.json({
         status: 404,
@@ -61,7 +50,7 @@ const postEnviarCarrito = async (req, res, next) => {
       `
     })
 
-    await carritos.deleteById(carritoId)
+    await carritosService.deleteById(carritoId)
 
     res.redirect('/')
   } catch (error) {
@@ -102,6 +91,36 @@ const getFailsignup = async (req, res) => {
   res.render('failsignup')
 }
 
+const agregarProductoCarritoById = async (req, res, next) => {
+  try {
+    // eslint-disable-next-line camelcase
+    const { id, id_prod } = req.params
+    const producto = await productosService.listarPorId(id_prod)
+    if (producto.error) {
+      return res.json({
+        status: 400,
+        error: producto.error
+      })
+    }
+    const { nombre, descripcion, codigo, foto, precio, stock } = producto
+    const carrito = await carritosService.agregarProducto({ nombre, descripcion, codigo, foto, precio, stock }, id)
+    if (carrito.error) {
+      return res.json({
+        status: 400,
+        error: carrito.error
+      })
+    }
+
+    return res.redirect('/')
+    // return res.json({
+    //   status: 200,
+    //   body: carrito
+    // })
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   login,
   getFaillogin,
@@ -109,5 +128,6 @@ module.exports = {
   getSignUp,
   postSignUp,
   getFailsignup,
-  postEnviarCarrito
+  postEnviarCarrito,
+  agregarProductoCarritoById
 }

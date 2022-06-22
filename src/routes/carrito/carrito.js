@@ -1,13 +1,15 @@
 const Router = require('express')
-const { postCarrito, deleteCarritoById, getProductosCarritoById, postProductosCarritoById, agregarProductoCarritoById, deleteProdCarritoById, getCarritoByUserId } = require('../../controllers/carritos')
+// const { postCarrito, deleteCarritoById, getProductosCarritoById, postProductosCarritoById, deleteProdCarritoById, getCarritoByUserId } = require('../../controllers/carritos')
+
+const { carritosController } = require('../../controllers/index')
+
 const router = Router()
 
-router.post('/', postCarrito)
-router.delete('/:id', deleteCarritoById)
-router.get('/:id/productos', getProductosCarritoById)
-router.get('/usuario/:id', getCarritoByUserId)
-router.post('/:id/productos', postProductosCarritoById)
-router.get('/:id/producto/:id_prod', agregarProductoCarritoById)
-router.delete('/:id/productos/:id_prod', deleteProdCarritoById)
+router.post('/', (req, res, next) => carritosController.postCarrito(req, res, next))
+router.delete('/:id', (req, res, next) => carritosController.deleteCarritoById(req, res, next))
+router.get('/:id/productos', (req, res, next) => carritosController.getProductosCarritoById(req, res, next))
+router.get('/usuario/:id', (req, res, next) => carritosController.getCarritoByUserId(req, res, next))
+router.post('/:id/productos', (req, res, next) => carritosController.postProductosCarritoById(req, res, next))
+router.delete('/:id/productos/:id_prod', (req, res, next) => carritosController.deleteProdCarritoById(req, res, next))
 
 module.exports = router
