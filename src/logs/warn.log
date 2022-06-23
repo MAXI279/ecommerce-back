@@ -73,3 +73,4 @@
 {"level":"warn","message":"ruta /productos método GET no implementada"}
 {"level":"warn","message":"ruta /user método GET no implementada"}
 {"level":"error","message":"500 - [INTERNAL ERROR]"}
+{"level":"warn","message":"ruta /favicon.ico método GET no implementada"}
